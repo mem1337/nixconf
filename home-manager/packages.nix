@@ -1,20 +1,21 @@
 { pkgs, ...}: {
   home.packages = with pkgs; [
-      neofetch
+      # Gaming
+      steam
+      lutris
+      # Internet
       firefox
+      discord
+      tdesktop
+      qbittorrent
+      # Programs
+      neofetch
       htop
       kate
       pavucontrol
-      lutris
-      steam
-      discord
-      micro
       polkit
-      tdesktop
-      transmission-gtk
       locale
       unrar
-      gnomeExtensions.pop-shell
   ];
 }
 
