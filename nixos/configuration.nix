@@ -2,27 +2,29 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   # Bootloader.
-  boot = { 
-  loader.systemd-boot.enable = true;
-  loader.efi.canTouchEfiVariables = true;
-  loader.efi.efiSysMountPoint = "/boot/efi";
-  kernelPackages = pkgs.linuxPackages_zen;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    loader.efi.efiSysMountPoint = "/boot/efi";
+    kernelPackages = pkgs.linuxPackages_zen;
   };
 
   networking.hostName = "aleks"; # Define your hostname.
 
-  # Enable networking
+  # Enable networking and hardware feutures
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
+  hardware.nvidia.modesetting.enable = false;
 
   # Select internationalisation properties.
   i18n = {
-  	defaultLocale = "en_US.UTF-8";
+    defaultLocale = "en_US.UTF-8";
   };
 
   time = {
@@ -30,20 +32,19 @@
     hardwareClockInLocalTime = true;
   };
 
-  # Enable the X11 windowing system and drivers (and misc)
+  # Enable the X11 windowing system and drivers and misc
   zramSwap.enable = true;
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.modesetting.enable = true;
   hardware.opengl = {
-        enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
-      };
-      
-  # Enable the Gnome Desktop Environment
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  # Enable the Plasma Desktop Environment
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
   
   # Configure keymap in X11
   services.xserver = {
@@ -74,22 +75,23 @@
     search = [ "tail47254.ts.net" ];
     firewall.checkReversePath = "loose";
   };
-  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.aleks = {
     isNormalUser = true;
     description = "aleks";
+    shell = pkgs.zsh;
     extraGroups = [ "networkmanager" "wheel" ];
   };
-  
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   system.stateVersion = "23.05"; # Did you read the comment?
