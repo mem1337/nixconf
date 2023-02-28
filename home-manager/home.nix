@@ -33,6 +33,7 @@
     };
   };
 
+
   home = {
     username = "aleks";
     homeDirectory = "/home/aleks";

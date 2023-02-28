@@ -20,7 +20,6 @@
   # Enable networking and hardware feutures
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
-  hardware.nvidia.modesetting.enable = false;
 
   # Select internationalisation properties.
   i18n = {
@@ -34,11 +33,14 @@
 
   # Enable the X11 windowing system and drivers and misc
   zramSwap.enable = true;
+  zramSwap.memoryPercent = 100;
   services.xserver.enable = true;
+
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
   hardware.opengl = {
     enable = true;
-    driSupport = true;
+   driSupport = true;
     driSupport32Bit = true;
   };
 
@@ -67,6 +69,7 @@
     jack.enable = true;
   };
 
+  # Misc settings
   services.tailscale.enable = true;
   programs.gamemode.enable = true;
   programs.dconf.enable = true;
@@ -91,7 +94,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
+    wget
+    git
+    python3
   ];
 
   system.stateVersion = "23.05"; # Did you read the comment?

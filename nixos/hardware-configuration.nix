@@ -14,15 +14,17 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0fce2f23-b2cd-483b-95da-a6c407c10cb0";
+    { device = "/dev/disk/by-uuid/17612572-a92a-476b-b3b2-ba2bfd13ec47";
       fsType = "ext4";
     };
+
   fileSystems."/home/aleks/hdd" =
     { device = "/dev/disk/by-uuid/3c8c6f7e-afb5-4deb-b1fe-26b93503bf56";
       fsType = "ext4";
     };
+
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/F00B-396B";
+    { device = "/dev/disk/by-uuid/389D-64EC";
       fsType = "vfat";
     };
 

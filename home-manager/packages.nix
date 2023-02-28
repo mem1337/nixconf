@@ -1,14 +1,15 @@
 { pkgs, ...}: {
   home.packages = with pkgs; [
       # Gaming
-      steam
       lutris
+      steam
       # Internet
       firefox
       discord
       tdesktop
       qbittorrent
       # Programs
+      ark
       neofetch
       htop
       kate
@@ -16,6 +17,7 @@
       polkit
       locale
       unrar
+      p7zip
   ];
 }
 
